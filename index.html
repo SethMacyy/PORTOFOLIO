@@ -15,9 +15,17 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top left, #1f1f1f, #0d0d0d);
+      background: linear-gradient(135deg, #0d0d0d, #1a1a2e, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       color: white;
       overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .background {
@@ -28,12 +36,11 @@
       left: 0;
       z-index: -1;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      width: 4px;
-      height: 4px;
       background: #f5c518;
       border-radius: 50%;
       opacity: 0.2;
@@ -43,6 +50,24 @@
     @keyframes moveParticle {
       0% { transform: translateY(0) translateX(0); opacity: 0.3; }
       100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(270deg, white, transparent);
+      top: -20px;
+      left: 100%;
+      opacity: 0.6;
+      transform: rotate(-45deg);
+      animation: shooting 6s linear infinite;
+    }
+
+    @keyframes shooting {
+      0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
     }
 
     header {
@@ -172,7 +197,8 @@
       margin-top: 20px;
     }
 
-    .text button {
+    .resume-button {
+      display: inline-block;
       margin-top: 30px;
       background: transparent;
       border: 1px solid #f5c518;
@@ -181,9 +207,10 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: 600;
+      text-decoration: none;
     }
 
-    .text button:hover {
+    .resume-button:hover {
       background-color: #f5c518;
       color: black;
       transition: 0.3s;
@@ -257,6 +284,13 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -264,7 +298,7 @@
   <div class="background"></div>
 
   <header>
-    <div class="logo">Surya Putra Darma Jaya</div>
+    <div class="logo">suryaPutra();</div>
     <nav>
       <div class="hamburger" id="hamburger">☰</div>
       <div class="nav-links" id="navLinks">
@@ -277,23 +311,21 @@
     </nav>
   </header>
 
-  <!-- Home -->
   <section class="hero" id="home">
     <div class="hero-inner reveal">
       <img src="profile.jpg" alt="Foto Profil" class="profile-image">
       <div class="text">
-        <h3>WEBSITE DALAM PENGEMBANGAN...</h3>
+        <h3>Hello World, I'm</h3>
         <h1>SURYA PUTRA DARMA JAYA</h1>
         <h2><span class="typed-text"></span><span class="cursor">|</span></h2>
         <p>Welcome to my personal website. 👋</p>
-        <button>📄 Download Resume</button>
+        <a href="resume-surya.jpg" download class="resume-button">📄 Download Resume</a>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- About -->
   <section id="about" class="reveal">
     <div class="section-title">About Me</div>
     <div class="section-content">
@@ -303,7 +335,6 @@
 
   <hr class="divider">
 
-  <!-- Portfolio -->
   <section id="portfolio" class="reveal">
     <div class="section-title">Portfolio</div>
     <div class="section-content">
@@ -313,7 +344,6 @@
 
   <hr class="divider">
 
-  <!-- Blog -->
   <section id="blog" class="reveal">
     <div class="section-title">Blog</div>
     <div class="section-content">
@@ -321,21 +351,32 @@
     </div>
   </section>
 
+  <footer>
+    © 2025 SURYA PUTRA DARMA JAYA. All rights reserved.
+  </footer>
+
   <script>
-    // Partikel animasi
     const background = document.querySelector('.background');
+
     for (let i = 0; i < 30; i++) {
       const p = document.createElement('div');
       p.classList.add('particle');
       p.style.top = `${Math.random() * 100}vh`;
       p.style.left = `${Math.random() * 100}vw`;
       p.style.animationDuration = `${5 + Math.random() * 10}s`;
-      p.style.width = `${2 + Math.random() * 3}px`;
-      p.style.height = p.style.width;
+      const size = `${2 + Math.random() * 2}px`;
+      p.style.width = size;
+      p.style.height = size;
       background.appendChild(p);
     }
 
-    // Scroll Reveal
+    for (let i = 0; i < 3; i++) {
+      const star = document.createElement("div");
+      star.classList.add("shooting-star");
+      star.style.animationDelay = `${Math.random() * 10}s`;
+      background.appendChild(star);
+    }
+
     const revealElements = document.querySelectorAll(".reveal");
     window.addEventListener("scroll", () => {
       revealElements.forEach(el => {
@@ -345,9 +386,9 @@
       updateActiveNav();
     });
 
-    // Navbar Indicator
     const navLinks = document.querySelectorAll(".nav-link");
     const indicator = document.querySelector(".indicator");
+    const sections = document.querySelectorAll("section");
 
     function updateIndicator(el) {
       if (window.innerWidth > 768) {
@@ -367,7 +408,6 @@
       });
     });
 
-    const sections = document.querySelectorAll("section");
     function updateActiveNav() {
       let currentSectionId = "";
       sections.forEach(section => {
@@ -386,26 +426,13 @@
       });
     }
 
-    window.addEventListener("load", () => {
-      const current = document.querySelector(".nav-link.active");
-      if (current) updateIndicator(current);
-      updateActiveNav();
-    });
-
-    // Hamburger menu
     const hamburger = document.getElementById("hamburger");
     hamburger.addEventListener("click", () => {
       document.getElementById("navLinks").classList.toggle("show");
     });
 
-    // Typing animation
     const typedTextSpan = document.querySelector(".typed-text");
-    const cursorSpan = document.querySelector(".cursor");
-
     const textArray = ["Web Developer", "UI Designer", "Front-End Engineer"];
-    const typingDelay = 100;
-    const erasingDelay = 50;
-    const newTextDelay = 1500;
     let textArrayIndex = 0;
     let charIndex = 0;
 
@@ -413,9 +440,9 @@
       if (charIndex < textArray[textArrayIndex].length) {
         typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
         charIndex++;
-        setTimeout(type, typingDelay);
+        setTimeout(type, 100);
       } else {
-        setTimeout(erase, newTextDelay);
+        setTimeout(erase, 1500);
       }
     }
 
@@ -423,16 +450,25 @@
       if (charIndex > 0) {
         typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
         charIndex--;
-        setTimeout(erase, erasingDelay);
+        setTimeout(erase, 50);
       } else {
-        textArrayIndex++;
-        if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-        setTimeout(type, typingDelay + 300);
+        textArrayIndex = (textArrayIndex + 1) % textArray.length;
+        setTimeout(type, 400);
       }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       if (textArray.length) setTimeout(type, 1000);
+    });
+
+    window.addEventListener("load", () => {
+      updateActiveNav();
+      const current = document.querySelector(".nav-link.active");
+      if (current) updateIndicator(current);
+      revealElements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) el.classList.add("active");
+      });
     });
   </script>
 </body>
