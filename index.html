@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portofolio SURYA PUTRA DARMA JAYA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #1f1f1f, #0d0d0d);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #f5c518;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: moveParticle 10s linear infinite;
+    }
+
+    @keyframes moveParticle {
+      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+    }
+
+    header {
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .logo {
+      color: #f5c518;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    nav {
+      position: relative;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: white;
+    }
+
+    nav .indicator {
+      position: absolute;
+      bottom: -6px;
+      height: 3px;
+      width: 60px;
+      background-color: #f5c518;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+      left: 0;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: #f5c518;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #111;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        z-index: 999;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      nav .indicator {
+        display: none;
+      }
+    }
+
+    section {
+      padding: 120px 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero .hero-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .text {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .text h3 {
+      color: #f5c518;
+      font-weight: 400;
+    }
+
+    .text h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .text h2 {
+      font-weight: 400;
+      font-size: 24px;
+      min-height: 30px;
+    }
+
+    .text p {
+      margin-top: 20px;
+    }
+
+    .text button {
+      margin-top: 30px;
+      background: transparent;
+      border: 1px solid #f5c518;
+      color: #f5c518;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .text button:hover {
+      background-color: #f5c518;
+      color: black;
+      transition: 0.3s;
+    }
+
+    .profile-image {
+      border-radius: 50%;
+      border: 4px solid #f5c518;
+      padding: 5px;
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      box-shadow: 0 0 30px 10px rgba(245, 197, 24, 0.6);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .profile-image:hover {
+      box-shadow: 0 0 50px 20px rgba(245, 197, 24, 0.9);
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #f5c518;
+      text-align: center;
+    }
+
+    .section-content {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #f5c518, transparent);
+      margin: 60px auto;
+      width: 80%;
+      opacity: 0.5;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.9s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .typed-text {
+      color: #f5c518;
+      font-weight: 600;
+    }
+
+    .cursor {
+      display: inline-block;
+      background-color: #f5c518;
+      width: 2px;
+      margin-left: 2px;
+      animation: blink 0.7s infinite;
+      height: 24px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background"></div>
+
+  <header>
+    <div class="logo">Surya Putra Darma Jaya</div>
+    <nav>
+      <div class="hamburger" id="hamburger">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#blog" class="nav-link">Blog</a>
+      </div>
+      <span class="indicator"></span>
+    </nav>
+  </header>
+
+  <!-- Home -->
+  <section class="hero" id="home">
+    <div class="hero-inner reveal">
+      <img src="profile.jpg" alt="Foto Profil" class="profile-image">
+      <div class="text">
+        <h3>WEBSITE DALAM PENGEMBANGAN...</h3>
+        <h1>SURYA PUTRA DARMA JAYA</h1>
+        <h2><span class="typed-text"></span><span class="cursor">|</span></h2>
+        <p>Welcome to my personal website. 👋</p>
+        <button>📄 Download Resume</button>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- About -->
+  <section id="about" class="reveal">
+    <div class="section-title">About Me</div>
+    <div class="section-content">
+      Saya adalah seorang web developer yang memiliki passion dalam membangun antarmuka web yang estetis, responsif, dan interaktif. Saya suka memadukan desain futuristik dengan teknologi modern.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="reveal">
+    <div class="section-title">Portfolio</div>
+    <div class="section-content">
+      Website toko online, sistem pemesanan, dan dashboard admin. Dibuat dengan HTML, CSS, JS, React, dsb.
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Blog -->
+  <section id="blog" class="reveal">
+    <div class="section-title">Blog</div>
+    <div class="section-content">
+      Saya menulis tentang pengalaman coding, tips belajar web development, serta membahas teknologi terbaru.
+    </div>
+  </section>
+
+  <script>
+    // Partikel animasi
+    const background = document.querySelector('.background');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.top = `${Math.random() * 100}vh`;
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.animationDuration = `${5 + Math.random() * 10}s`;
+      p.style.width = `${2 + Math.random() * 3}px`;
+      p.style.height = p.style.width;
+      background.appendChild(p);
+    }
+
+    // Scroll Reveal
+    const revealElements = document.querySelectorAll(".reveal");
+    window.addEventListener("scroll", () => {
+      revealElements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) el.classList.add("active");
+      });
+      updateActiveNav();
+    });
+
+    // Navbar Indicator
+    const navLinks = document.querySelectorAll(".nav-link");
+    const indicator = document.querySelector(".indicator");
+
+    function updateIndicator(el) {
+      if (window.innerWidth > 768) {
+        indicator.style.left = el.offsetLeft + "px";
+        indicator.style.width = el.offsetWidth + "px";
+      }
+      navLinks.forEach(link => link.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        updateIndicator(e.target);
+        if (window.innerWidth <= 768) {
+          document.getElementById("navLinks").classList.remove("show");
+        }
+      });
+    });
+
+    const sections = document.querySelectorAll("section");
+    function updateActiveNav() {
+      let currentSectionId = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          currentSectionId = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        const targetId = link.getAttribute("href").substring(1);
+        if (targetId === currentSectionId) {
+          updateIndicator(link);
+        }
+      });
+    }
+
+    window.addEventListener("load", () => {
+      const current = document.querySelector(".nav-link.active");
+      if (current) updateIndicator(current);
+      updateActiveNav();
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById("hamburger");
+    hamburger.addEventListener("click", () => {
+      document.getElementById("navLinks").classList.toggle("show");
+    });
+
+    // Typing animation
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Web Developer", "UI Designer", "Front-End Engineer"];
+    const typingDelay = 100;
+    const erasingDelay = 50;
+    const newTextDelay = 1500;
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+      if (charIndex < textArray[textArrayIndex].length) {
+        typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, typingDelay);
+      } else {
+        setTimeout(erase, newTextDelay);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, erasingDelay);
+      } else {
+        textArrayIndex++;
+        if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+        setTimeout(type, typingDelay + 300);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (textArray.length) setTimeout(type, 1000);
+    });
+  </script>
+</body>
+</html>
