@@ -28,6 +28,48 @@
       100% { background-position: 0% 50%; }
     }
 
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: #f5c518;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: moveParticle 10s linear infinite;
+    }
+
+    @keyframes moveParticle {
+      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(270deg, white, transparent);
+      top: -20px;
+      left: 100%;
+      opacity: 0.6;
+      transform: rotate(-45deg);
+      animation: shooting 6s linear infinite;
+    }
+
+    @keyframes shooting {
+      0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
+    }
+
     header {
       padding: 20px 30px;
       display: flex;
@@ -45,11 +87,6 @@
     .logo {
       font-weight: 700;
       font-size: 20px;
-    }
-
-    .logo-highlight {
-      color: rgba(245, 197, 24, 0.7);
-      text-shadow: 0 0 8px rgba(245, 197, 24, 0.3);
     }
 
     nav {
@@ -115,48 +152,6 @@
       nav .indicator {
         display: none;
       }
-    }
-
-    .background {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      background: #f5c518;
-      border-radius: 50%;
-      opacity: 0.2;
-      animation: moveParticle 10s linear infinite;
-    }
-
-    @keyframes moveParticle {
-      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
-      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
-    }
-
-    .shooting-star {
-      position: absolute;
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(270deg, white, transparent);
-      top: -20px;
-      left: 100%;
-      opacity: 0.6;
-      transform: rotate(-45deg);
-      animation: shooting 6s linear infinite;
-    }
-
-    @keyframes shooting {
-      0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
     }
 
     section {
@@ -330,9 +325,7 @@
   <div class="background"></div>
 
   <header>
-    <div class="logo">
-      <span class="logo-highlight">SP</span><span style="color: #aaa;">DJ</span>
-    </div>
+    <div class="logo"><span style="color: #f5c518;">SP</span><span style="color: #666;">DJ</span></div>
     <nav>
       <div class="hamburger" id="hamburger">☰</div>
       <div class="nav-links" id="navLinks">
@@ -347,7 +340,7 @@
 
   <section class="hero" id="home">
     <div class="hero-inner reveal">
-      <img src="profile.jpg" alt="Foto Profil" class="profile-image">
+      <img src="profile.jpg" alt="Foto Profil" class="profile-image" data-tilt data-tilt-scale="1.1">
       <div class="text">
         <h3>WEBSITE DALAM PENGEMBANGAN...</h3>
         <h1>SURYA PUTRA DARMA JAYA</h1>
@@ -355,12 +348,11 @@
         <p>Welcome to my personal website. 👋</p>
         <a href="resume-surya.jpg" download class="resume-button">📄 Download Resume</a>
 
-        <!-- Sosial Media -->
         <div class="social-icons">
-          <a href="https://www.facebook.com/suryaputra.darmajaya" target="_blank" class="icon facebook" title="Facebook"></a>
+          <a href="https://facebook.com/suryaputra.darmajaya" target="_blank" class="icon facebook" title="Facebook"></a>
           <a href="mailto:suryaputradj16@gmail.com" class="icon gmail" title="Gmail"></a>
-          <a href="https://github.com/sethmacyy" target="_blank" class="icon github" title="GitHub"></a>
-          <a href="https://www.instagram.com/116sryaptra?igsh=MzM0cGlmb2c3aWQ=" target="_blank" class="icon instagram" title="Instagram"></a>
+          <a href="https://github.com/username" target="_blank" class="icon github" title="GitHub"></a>
+          <a href="https://instagram.com/116sryaptra" target="_blank" class="icon instagram" title="Instagram"></a>
           <a href="https://linkedin.com/in/username" target="_blank" class="icon linkedin" title="LinkedIn"></a>
         </div>
       </div>
@@ -398,6 +390,9 @@
     © 2025 SURYA PUTRA DARMA JAYA. All rights reserved.
   </footer>
 
+  <!-- Vanilla Tilt JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
   <script>
     const background = document.querySelector('.background');
     for (let i = 0; i < 30; i++) {
@@ -411,7 +406,6 @@
       p.style.height = size;
       background.appendChild(p);
     }
-
     for (let i = 0; i < 3; i++) {
       const star = document.createElement("div");
       star.classList.add("shooting-star");
