@@ -28,48 +28,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    .background {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .particle {
-      position: absolute;
-      background: #f5c518;
-      border-radius: 50%;
-      opacity: 0.2;
-      animation: moveParticle 10s linear infinite;
-    }
-
-    @keyframes moveParticle {
-      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
-      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
-    }
-
-    .shooting-star {
-      position: absolute;
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(270deg, white, transparent);
-      top: -20px;
-      left: 100%;
-      opacity: 0.6;
-      transform: rotate(-45deg);
-      animation: shooting 6s linear infinite;
-    }
-
-    @keyframes shooting {
-      0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
-    }
-
     header {
       padding: 20px 30px;
       display: flex;
@@ -85,9 +43,13 @@
     }
 
     .logo {
-      color: #f5c518;
       font-weight: 700;
       font-size: 20px;
+    }
+
+    .logo-highlight {
+      color: rgba(245, 197, 24, 0.7);
+      text-shadow: 0 0 8px rgba(245, 197, 24, 0.3);
     }
 
     nav {
@@ -155,6 +117,48 @@
       }
     }
 
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: #f5c518;
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: moveParticle 10s linear infinite;
+    }
+
+    @keyframes moveParticle {
+      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(270deg, white, transparent);
+      top: -20px;
+      left: 100%;
+      opacity: 0.6;
+      transform: rotate(-45deg);
+      animation: shooting 6s linear infinite;
+    }
+
+    @keyframes shooting {
+      0% { transform: translate(0, 0) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translate(-120vw, 120vh) rotate(-45deg); opacity: 0; }
+    }
+
     section {
       padding: 120px 80px;
       min-height: 100vh;
@@ -215,6 +219,35 @@
       color: black;
       transition: 0.3s;
     }
+
+    .social-icons {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 10px rgba(245, 197, 24, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 25px rgba(245, 197, 24, 0.9);
+    }
+
+    .facebook { background-image: url('https://cdn-icons-png.flaticon.com/512/733/733547.png'); }
+    .gmail { background-image: url('https://cdn-icons-png.flaticon.com/512/281/281769.png'); }
+    .github { background-image: url('https://cdn-icons-png.flaticon.com/512/733/733553.png'); }
+    .instagram { background-image: url('https://cdn-icons-png.flaticon.com/512/1384/1384063.png'); }
+    .linkedin { background-image: url('https://cdn-icons-png.flaticon.com/512/174/174857.png'); }
 
     .profile-image {
       border-radius: 50%;
@@ -294,11 +327,12 @@
   </style>
 </head>
 <body>
-
   <div class="background"></div>
 
   <header>
-    <div class="logo">COMING SOON</div>
+    <div class="logo">
+      <span class="logo-highlight">SP</span><span style="color: #aaa;">DJ</span>
+    </div>
     <nav>
       <div class="hamburger" id="hamburger">☰</div>
       <div class="nav-links" id="navLinks">
@@ -320,6 +354,15 @@
         <h2><span class="typed-text"></span><span class="cursor">|</span></h2>
         <p>Welcome to my personal website. 👋</p>
         <a href="resume-surya.jpg" download class="resume-button">📄 Download Resume</a>
+
+        <!-- Sosial Media -->
+        <div class="social-icons">
+          <a href="https://www.facebook.com/suryaputra.darmajaya" target="_blank" class="icon facebook" title="Facebook"></a>
+          <a href="mailto:suryaputradj16@gmail.com" class="icon gmail" title="Gmail"></a>
+          <a href="https://github.com/sethmacyy" target="_blank" class="icon github" title="GitHub"></a>
+          <a href="https://www.instagram.com/116sryaptra?igsh=MzM0cGlmb2c3aWQ=" target="_blank" class="icon instagram" title="Instagram"></a>
+          <a href="https://linkedin.com/in/username" target="_blank" class="icon linkedin" title="LinkedIn"></a>
+        </div>
       </div>
     </div>
   </section>
@@ -357,7 +400,6 @@
 
   <script>
     const background = document.querySelector('.background');
-
     for (let i = 0; i < 30; i++) {
       const p = document.createElement('div');
       p.classList.add('particle');
